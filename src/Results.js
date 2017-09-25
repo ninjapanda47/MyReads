@@ -5,7 +5,6 @@ import './App.css'
 
 class Results extends Component {
 
-
   render() {
 
     const { results } = this.props
