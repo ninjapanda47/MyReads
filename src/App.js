@@ -16,7 +16,18 @@ class BooksApp extends React.Component {
     })
   }
 
+  searchBooks(query, maxResults) {
+    BooksAPI.search(query, maxResults).then((results)=>{
+      console.log(results)
+      this.setState({ results })
+    })
+  }
+
+
+
   render() {
+    let query = ''
+
     return (
       <div className="app">
         <Route exact path='/' render={() => (
@@ -59,6 +70,7 @@ class BooksApp extends React.Component {
 
         <Route path='/search' render={() => (
           <Search
+          results = {this.searchBooks}
           />
         )} />
 
