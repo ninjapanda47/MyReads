@@ -13,16 +13,17 @@ class BooksApp extends React.Component {
   componentDidMount() {
     BooksAPI.getAll().then((results) => {
       this.setState({ results })
+      console.log(this)
     })
   }
 
-  searchBooks(query, maxResults) {
+
+  searchBooks = (query, maxResults) => {
     BooksAPI.search(query, maxResults).then((results)=>{
       console.log(results)
       this.setState({ results })
     })
   }
-
 
 
   render() {
@@ -70,7 +71,8 @@ class BooksApp extends React.Component {
 
         <Route path='/search' render={() => (
           <Search
-          results = {this.searchBooks}
+          test= {this.searchBooks}   
+          results={this.state.results}       
           />
         )} />
 
@@ -81,3 +83,4 @@ class BooksApp extends React.Component {
 }
 
 export default BooksApp
+

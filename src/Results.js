@@ -10,6 +10,7 @@ class Results extends Component {
     const { results } = this.props
     console.log(this.props)
 
+
     return (
       <ol className="books-grid">
         {results.map((result) => (

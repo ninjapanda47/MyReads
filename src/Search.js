@@ -8,19 +8,21 @@ import escapeRegExp from 'escape-string-regexp'
 
 class Search extends Component {
     state = {
-        results: [],
-        query: ''
+        query: '',
+        result: []
     }
 
     updateQuery = (query) => {
-        this.setState({ query: query.trim() })
-        this.props.results(query, 10);
+        this.setState({ query: query.trim()})
+        this.props.test(query)
+        console.log(query)
     }
 
     render() {
-        const { searchBooks } = this.props
-        const { query, results } = this.state
-        console.log(this.props)
+
+        const { query } = this.state
+        const { results } = this.props
+        console.log(this.props.results)
 
         return (
             <div className="search">
@@ -35,7 +37,7 @@ class Search extends Component {
                         </div>
                     </div>
                     <div className="search-books-results">
-                        <Results results={this.state.results} />
+                        <Results results={results}/>
                     </div>
                 </div>
             </div>
