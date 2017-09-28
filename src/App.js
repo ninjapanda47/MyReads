@@ -7,7 +7,8 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    results: []
+    results: [],
+    search: []
   }
 
   componentDidMount() {
@@ -17,12 +18,10 @@ class BooksApp extends React.Component {
     })
   }
 
-
-
   searchBooks = (query, maxResults) => {
-    BooksAPI.search(query, maxResults).then((results)=>{
-      console.log(results)
-      this.setState({ results })
+    BooksAPI.search(query, maxResults).then((search)=>{
+      console.log(search)
+      this.setState({ search })
     })
   }
 
@@ -72,7 +71,7 @@ class BooksApp extends React.Component {
         <Route path='/search' render={() => (
           <Search
           test= {this.searchBooks}   
-          results={this.state.results}       
+          results={this.state.search}       
           />
         )} />
 
