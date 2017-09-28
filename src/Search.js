@@ -8,8 +8,7 @@ import escapeRegExp from 'escape-string-regexp'
 
 class Search extends Component {
     state = {
-        query: '',
-        result: []
+        query: ''
     }
 
     updateQuery = (query) => {

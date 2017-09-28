@@ -18,6 +18,7 @@ class BooksApp extends React.Component {
   }
 
 
+
   searchBooks = (query, maxResults) => {
     BooksAPI.search(query, maxResults).then((results)=>{
       console.log(results)
@@ -27,7 +28,6 @@ class BooksApp extends React.Component {
 
 
   render() {
-    let query = ''
 
     return (
       <div className="app">
