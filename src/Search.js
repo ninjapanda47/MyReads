@@ -13,7 +13,7 @@ class Search extends Component {
 
     updateQuery = (query) => {
         this.setState({ query: query.trim()})
-        this.props.test(query)
+        this.props.bookSearch(query)
         console.log(query)
     }
 

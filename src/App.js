@@ -6,6 +6,7 @@ import { Route, Link } from 'react-router-dom'
 import './App.css'
 
 class BooksApp extends React.Component {
+
   state = {
     results: [],
     search: []
@@ -18,13 +19,23 @@ class BooksApp extends React.Component {
     })
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ search: []})
+  }
+
   searchBooks = (query, maxResults) => {
-    BooksAPI.search(query, maxResults).then((search)=>{
+    BooksAPI.search(query, maxResults).then((search) => {
       console.log(search)
       this.setState({ search })
     })
   }
 
+  updateBooks = (book, shelf) => {
+    BooksAPI.update(book, shelf).then((results) => {
+      console.log(results)
+      this.setState({ results })
+    })
+  }
 
   render() {
 
@@ -41,19 +52,19 @@ class BooksApp extends React.Component {
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Currently Reading</h2>
                     <div className="bookshelf-books">
-                    <Results results={this.state.results.filter((result) => (result.shelf) == 'currentlyReading')}/>
+                      <Results results={this.state.results.filter((result) => (result.shelf) == 'currentlyReading')} />
                     </div>
                   </div>
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Want to Read</h2>
                     <div className="bookshelf-books">
-                    <Results results={this.state.results.filter((result) => (result.shelf) == 'wantToRead')}/>
+                      <Results results={this.state.results.filter((result) => (result.shelf) == 'wantToRead')} />
                     </div>
                   </div>
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Read</h2>
                     <div className="bookshelf-books">
-                    <Results results={this.state.results.filter((result) => (result.shelf) == 'read')}/>
+                      <Results results={this.state.results.filter((result) => (result.shelf) == 'read')} />
                     </div>
                   </div>
                 </div>
@@ -70,8 +81,8 @@ class BooksApp extends React.Component {
 
         <Route path='/search' render={() => (
           <Search
-          test= {this.searchBooks}   
-          results={this.state.search}       
+            bookSearch={this.searchBooks}
+            results={this.state.search}
           />
         )} />
 

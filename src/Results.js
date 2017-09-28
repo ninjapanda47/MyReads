@@ -7,7 +7,7 @@ class Results extends Component {
 
   render() {
 
-    const { results } = this.props
+    const { results } = this.props  
     console.log(this.props)
 
     return (
