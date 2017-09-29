@@ -15,7 +15,6 @@ class BooksApp extends React.Component {
   componentDidMount() {
     BooksAPI.getAll().then((results) => {
       this.setState({ results })
-      console.log(this)
     })
   }
 
@@ -31,16 +30,18 @@ class BooksApp extends React.Component {
   }
 
   updateBooks = (book, shelf) => {
-    BooksAPI.update(book, shelf).then((book, shelf) => {
-      this.setState(state => ({ results: state.results.concat([book, shelf]) }))
+    BooksAPI.update(book, shelf).then((book) => {
+      console.log('doneupdate')
+    BooksAPI.getAll().then((results) => {
+      this.setState({ results })
     })
-  }
+  })}
 
   render() {
 
     return (
       <div className="app">
-        <Route exact path='/' render={() => (
+        <Route exact path='/' render={({history}) => (
           <div className="results">
             <div className="list-books">
               <div className="list-books-title">
@@ -52,21 +53,30 @@ class BooksApp extends React.Component {
                     <h2 className="bookshelf-title">Currently Reading</h2>
                     <div className="bookshelf-books">
                       <Results results={this.state.results.filter((result) => (result.shelf) == 'currentlyReading')}
-                        onUpdateBooks={this.updateBooks} />
+                        onUpdateBooks={(book, shelf) => {
+                          this.updateBooks(book, shelf)
+                          history.push('/')
+                        }} />
                     </div>
                   </div>
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Want to Read</h2>
                     <div className="bookshelf-books">
                       <Results results={this.state.results.filter((result) => (result.shelf) == 'wantToRead')}
-                        onUpdateBooks={this.updateBooks} />
+                        onUpdateBooks={(book, shelf) => {
+                          this.updateBooks(book, shelf)
+                          history.push('/')
+                        }} />
                     </div>
                   </div>
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Read</h2>
                     <div className="bookshelf-books">
                       <Results results={this.state.results.filter((result) => (result.shelf) == 'read')}
-                        onUpdateBooks={this.updateBooks} />
+                        onUpdateBooks={(book, shelf) => {
+                          this.updateBooks(book, shelf)
+                          history.push('/')
+                        }} />
                     </div>
                   </div>
                 </div>
