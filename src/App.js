@@ -32,8 +32,10 @@ class BooksApp extends React.Component {
 
   updateBooks = (book, shelf) => {
     BooksAPI.update(book, shelf).then((results) => {
-      console.log(results)
+    BooksAPI.getAll().then((results) => {
       this.setState({ results })
+      console.log(this)
+    })
     })
   }
 
@@ -52,19 +54,22 @@ class BooksApp extends React.Component {
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Currently Reading</h2>
                     <div className="bookshelf-books">
-                      <Results results={this.state.results.filter((result) => (result.shelf) == 'currentlyReading')} />
+                      <Results results={this.state.results.filter((result) => (result.shelf) == 'currentlyReading')}
+                         update={this.updateBooks}/>
                     </div>
                   </div>
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Want to Read</h2>
                     <div className="bookshelf-books">
-                      <Results results={this.state.results.filter((result) => (result.shelf) == 'wantToRead')} />
+                      <Results results={this.state.results.filter((result) => (result.shelf) == 'wantToRead')}
+                        update={this.updateBooks} />
                     </div>
                   </div>
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Read</h2>
                     <div className="bookshelf-books">
-                      <Results results={this.state.results.filter((result) => (result.shelf) == 'read')} />
+                      <Results results={this.state.results.filter((result) => (result.shelf) == 'read')} 
+                        update={this.updateBooks}/>
                     </div>
                   </div>
                 </div>
@@ -79,9 +84,10 @@ class BooksApp extends React.Component {
 
         )} />
 
-        <Route path='/search' render={() => (
+        <Route path='/search' render={({ history }) => (
           <Search
             bookSearch={this.searchBooks}
+            update={this.updateBooks}
             results={this.state.search}
           />
         )} />

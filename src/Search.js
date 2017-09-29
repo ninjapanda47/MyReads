@@ -20,8 +20,8 @@ class Search extends Component {
     render() {
 
         const { query } = this.state
-        const { results } = this.props
-        console.log(this.props.results)
+        const { results,update } = this.props
+        console.log(this.props)
 
         return (
             <div className="search">
@@ -36,7 +36,8 @@ class Search extends Component {
                         </div>
                     </div>
                     <div className="search-books-results">
-                        <Results results={results}/>
+                        <Results results={results}
+                        update={update}/>
                     </div>
                 </div>
             </div>

@@ -5,9 +5,15 @@ import './App.css'
 
 class Results extends Component {
 
+      updateBooks = (book, shelf) => {
+        console.log(book,shelf)
+        this.props.update(book, shelf)
+    }
+
+
   render() {
 
-    const { results } = this.props  
+    const { results } = this.props 
     console.log(this.props)
 
     return (
@@ -17,7 +23,7 @@ class Results extends Component {
             <div className="book-top">
               <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${result.imageLinks.smallThumbnail})` }}></div>
               <div className="book-shelf-changer">
-                <select>
+                <select onChange={(event) => this.updateBooks(result.id, event.target.value)}>
                   <option value="none" disabled>Move to...</option>
                   <option value="currentlyReading">Currently Reading</option>
                   <option value="wantToRead">Want to Read</option>
