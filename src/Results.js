@@ -5,15 +5,15 @@ import './App.css'
 
 class Results extends Component {
 
-      updateBooks = (book, shelf) => {
-        console.log(book,shelf)
-        this.props.update(book, shelf)
-    }
+  updateBooks = (book, shelf) => {
+    console.log(book, shelf)
+    this.props.onUpdateBooks(book, shelf)
+  }
 
 
   render() {
 
-    const { results } = this.props 
+    const { results } = this.props
     console.log(this.props)
 
     return (

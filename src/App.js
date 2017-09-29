@@ -20,7 +20,7 @@ class BooksApp extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ search: []})
+    this.setState({ search: [] })
   }
 
   searchBooks = (query, maxResults) => {
@@ -31,11 +31,8 @@ class BooksApp extends React.Component {
   }
 
   updateBooks = (book, shelf) => {
-    BooksAPI.update(book, shelf).then((results) => {
-    BooksAPI.getAll().then((results) => {
-      this.setState({ results })
-      console.log(this)
-    })
+    BooksAPI.update(book, shelf).then((book, shelf) => {
+      this.setState(state => ({ results: state.results.concat([book, shelf]) }))
     })
   }
 
@@ -55,21 +52,21 @@ class BooksApp extends React.Component {
                     <h2 className="bookshelf-title">Currently Reading</h2>
                     <div className="bookshelf-books">
                       <Results results={this.state.results.filter((result) => (result.shelf) == 'currentlyReading')}
-                         update={this.updateBooks}/>
+                        onUpdateBooks={this.updateBooks} />
                     </div>
                   </div>
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Want to Read</h2>
                     <div className="bookshelf-books">
                       <Results results={this.state.results.filter((result) => (result.shelf) == 'wantToRead')}
-                        update={this.updateBooks} />
+                        onUpdateBooks={this.updateBooks} />
                     </div>
                   </div>
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Read</h2>
                     <div className="bookshelf-books">
-                      <Results results={this.state.results.filter((result) => (result.shelf) == 'read')} 
-                        update={this.updateBooks}/>
+                      <Results results={this.state.results.filter((result) => (result.shelf) == 'read')}
+                        onUpdateBooks={this.updateBooks} />
                     </div>
                   </div>
                 </div>
@@ -87,10 +84,14 @@ class BooksApp extends React.Component {
         <Route path='/search' render={({ history }) => (
           <Search
             bookSearch={this.searchBooks}
-            update={this.updateBooks}
             results={this.state.search}
+            onUpdateBooks={(book, shelf) => {
+              this.updateBooks(book, shelf)
+              history.push('/')
+            }}
           />
         )} />
+
 
 
       </div>

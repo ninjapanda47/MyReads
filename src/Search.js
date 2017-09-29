@@ -12,7 +12,7 @@ class Search extends Component {
     }
 
     updateQuery = (query) => {
-        this.setState({ query: query.trim()})
+        this.setState({ query: query.trim() })
         this.props.bookSearch(query)
         console.log(query)
     }
@@ -20,7 +20,7 @@ class Search extends Component {
     render() {
 
         const { query } = this.state
-        const { results,update } = this.props
+        const { results, onUpdateBooks } = this.props
         console.log(this.props)
 
         return (
@@ -37,7 +37,7 @@ class Search extends Component {
                     </div>
                     <div className="search-books-results">
                         <Results results={results}
-                        update={update}/>
+                            onUpdateBooks={onUpdateBooks} />
                     </div>
                 </div>
             </div>
