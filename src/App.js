@@ -52,7 +52,7 @@ class BooksApp extends React.Component {
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Currently Reading</h2>
                     <div className="bookshelf-books">
-                      <Results results={this.state.results.filter((result) => (result.shelf) == 'currentlyReading')}
+                      <Results results={this.state.results.filter((result) => (result.shelf) === 'currentlyReading')}
                         onUpdateBooks={(book, shelf) => {
                           this.updateBooks(book, shelf)
                           history.push('/')
@@ -62,7 +62,7 @@ class BooksApp extends React.Component {
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Want to Read</h2>
                     <div className="bookshelf-books">
-                      <Results results={this.state.results.filter((result) => (result.shelf) == 'wantToRead')}
+                      <Results results={this.state.results.filter((result) => (result.shelf) === 'wantToRead')}
                         onUpdateBooks={(book, shelf) => {
                           this.updateBooks(book, shelf)
                           history.push('/')
@@ -72,7 +72,7 @@ class BooksApp extends React.Component {
                   <div className="bookshelf">
                     <h2 className="bookshelf-title">Read</h2>
                     <div className="bookshelf-books">
-                      <Results results={this.state.results.filter((result) => (result.shelf) == 'read')}
+                      <Results results={this.state.results.filter((result) => (result.shelf) === 'read')}
                         onUpdateBooks={(book, shelf) => {
                           this.updateBooks(book, shelf)
                           history.push('/')
