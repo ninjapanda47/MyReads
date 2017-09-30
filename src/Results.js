@@ -23,8 +23,8 @@ class Results extends Component {
             <div className="book-top">
               <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${result.imageLinks.smallThumbnail})` }}></div>
               <div className="book-shelf-changer">
-                <select onChange={(event) => this.updateBooks(result, event.target.value)}>
-                  <option value="none">Move to...</option>
+                <select value = {result.shelf} onChange={(event) => this.updateBooks(result, event.target.value)}>
+                  <option value="none" disabled >Move to...</option>
                   <option value="currentlyReading">Currently Reading</option>
                   <option value="wantToRead">Want to Read</option>
                   <option value="read">Read</option>
