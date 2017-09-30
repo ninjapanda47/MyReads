@@ -10,7 +10,6 @@ class Results extends Component {
     this.props.onUpdateBooks(book, shelf)
   }
 
-
   render() {
 
     const { results } = this.props
@@ -21,7 +20,7 @@ class Results extends Component {
         {results.map((result) => (
           <li key={result.id} >
             <div className="book-top">
-              <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${result.imageLinks.smallThumbnail})` }}></div>
+              <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${result.imageLinks && result.imageLinks.thumbnail})` }}></div>
               <div className="book-shelf-changer">
                 <select value = {result.shelf} onChange={(event) => this.updateBooks(result, event.target.value)}>
                   <option value="none" disabled >Move to...</option>
