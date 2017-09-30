@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import Results from './Results'
 import { Link } from 'react-router-dom'
 import './App.css'
-import escapeRegExp from 'escape-string-regexp'
 
 class Search extends Component {
     state = {
@@ -13,14 +12,12 @@ class Search extends Component {
     updateQuery = (query) => {
         this.setState({ query: query.trim() })
         this.props.bookSearch(query)
-        console.log(query)
     }
 
     render() {
 
         const { query } = this.state
         const { results, onUpdateBooks } = this.props
-        console.log(this.props)
 
         return (
             <div className="search">

@@ -24,18 +24,17 @@ class BooksApp extends React.Component {
 
   searchBooks = (query, maxResults) => {
     BooksAPI.search(query, maxResults).then((search) => {
-      console.log(search)
       this.setState({ search })
     })
   }
 
   updateBooks = (book, shelf) => {
     BooksAPI.update(book, shelf).then((book) => {
-      console.log('doneupdate')
-    BooksAPI.getAll().then((results) => {
-      this.setState({ results })
+      BooksAPI.getAll().then((results) => {
+        this.setState({ results })
+      })
     })
-  })}
+  }
 
   render() {
 
@@ -82,12 +81,8 @@ class BooksApp extends React.Component {
                 <Link to='/search' className="open-search"> Add a book</Link>
               </div>
             </div>
-
           </div>
-
-
         )} />
-
         <Route path='/search' render={() => (
           <Search
             bookSearch={this.searchBooks}
@@ -97,9 +92,6 @@ class BooksApp extends React.Component {
             }}
           />
         )} />
-
-
-
       </div>
     )
   }
