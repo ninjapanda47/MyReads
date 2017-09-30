@@ -41,7 +41,7 @@ class BooksApp extends React.Component {
 
     return (
       <div className="app">
-        <Route exact path='/' render={({history}) => (
+        <Route exact path='/' render={() => (
           <div className="results">
             <div className="list-books">
               <div className="list-books-title">
@@ -55,7 +55,6 @@ class BooksApp extends React.Component {
                       <Results results={this.state.results.filter((result) => (result.shelf) === 'currentlyReading')}
                         onUpdateBooks={(book, shelf) => {
                           this.updateBooks(book, shelf)
-                          history.push('/')
                         }} />
                     </div>
                   </div>
@@ -65,7 +64,6 @@ class BooksApp extends React.Component {
                       <Results results={this.state.results.filter((result) => (result.shelf) === 'wantToRead')}
                         onUpdateBooks={(book, shelf) => {
                           this.updateBooks(book, shelf)
-                          history.push('/')
                         }} />
                     </div>
                   </div>
@@ -75,7 +73,6 @@ class BooksApp extends React.Component {
                       <Results results={this.state.results.filter((result) => (result.shelf) === 'read')}
                         onUpdateBooks={(book, shelf) => {
                           this.updateBooks(book, shelf)
-                          history.push('/')
                         }} />
                     </div>
                   </div>
@@ -91,13 +88,12 @@ class BooksApp extends React.Component {
 
         )} />
 
-        <Route path='/search' render={({ history }) => (
+        <Route path='/search' render={() => (
           <Search
             bookSearch={this.searchBooks}
             results={this.state.search}
             onUpdateBooks={(book, shelf) => {
               this.updateBooks(book, shelf)
-              history.push('/')
             }}
           />
         )} />
