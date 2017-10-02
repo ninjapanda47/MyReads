@@ -28,17 +28,18 @@ class BooksApp extends React.Component {
       this.setState({ search: [] })
     } else {
       BooksAPI.search(query, maxResults, this.state.results).then((search) => {
-        for (let i = 0; i < this.state.results.length; i++) {
-          for (let j = 0; j < search.length; j++) {
-            if (this.state.results[i].id === search[j].id) {
-              console.log('match')
-              search[j] = this.state.results[i]
-            }
-            else {
-              /*search[j].shelf = 'none'*/
-            }          
+        search.map((book) => {
+          const match = this.state.results.find((b) => {
+            return b.id === book.id
+          })
+          if (match) {
+            book.shelf = match.shelf
+            console.log('match' + match.shelf)
           }
-        }
+          else {
+            book.shelf = 'none'
+          }
+        })
         this.setState({ search })
       })
     }
@@ -47,6 +48,7 @@ class BooksApp extends React.Component {
   updateBooks = (book, shelf) => {
     BooksAPI.update(book, shelf).then((book) => {
       BooksAPI.getAll().then((results) => {
+
         this.setState({ results })
       })
     })
