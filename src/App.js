@@ -46,11 +46,20 @@ class BooksApp extends React.Component {
   }
 
   updateBooks = (book, shelf) => {
-    BooksAPI.update(book, shelf).then((book) => {
+    const search = [...this.state.search]
+    BooksAPI.update(book, shelf).then(() => {
       BooksAPI.getAll().then((results) => {
-
         this.setState({ results })
       })
+      search.forEach(b => {
+        if (b.id === book.id) {
+          b.shelf =shelf;
+        }
+        else {
+          b.shelf = 'none'
+        }
+      });
+      this.setState({ search })
     })
   }
 
@@ -106,7 +115,7 @@ class BooksApp extends React.Component {
             bookSearch={this.searchBooks}
             results={this.state.search}
             onUpdateBooks={(book, shelf) => {
-              this.updateBooks(book, shelf)
+            this.updateBooks(book, shelf)
             }}
           />
         )} />
